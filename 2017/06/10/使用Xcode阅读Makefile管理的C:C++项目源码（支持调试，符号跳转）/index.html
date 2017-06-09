@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://zachqin.github.io/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_redis_dummy_configuration.png">
 <meta property="og:image" content="http://zachqin.github.io/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_redis_dummy_add_compile_sources.png">
 <meta property="og:image" content="http://zachqin.github.io/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_redis_autocomplete.png">
-<meta property="og:updated_time" content="2017-06-09T19:43:34.000Z">
+<meta property="og:updated_time" content="2017-06-09T19:45:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Xcode阅读Makefile管理的C&#x2F;C++项目源码（支持调试，符号跳转）">
 <meta name="twitter:description" content="使用Xcode阅读Makefile管理的C/C++项目源码（支持调试，符号跳转，自动补全）最近打算阅读一些C/C++的开源项目源码来提升自己，不过开源项目大多使用Makefile构建和管理。关于阅读代码，我之前在Windows下用过 Source Insight ，它的符号调转、查找、导航非常强大，体验很好，但Mac平台一直没找到那么好用的代码浏览工具，Sublime Text + CTags 勉">
@@ -358,7 +358,7 @@
 <p>现在我们已经可以直接使用 Xcode 给代码添加断点了。下图我们在 <code>server.c</code> 文件的 main 函数中点击代码左侧来添加断点，按下 <code>⌘ + R</code> 程序自动停在断点处。</p>
 <img src="/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_redis_debug.png" alt="断点调试" title="断点调试">
 <p>此时虽然代码已经可以高亮关键字，但我们仍然无法使用代码跳转和自动补全功能。这些功能就需要下一步的 Dummy Target 辅助完成。</p>
-<h1 id="添加Dummy-Target"><a href="#添加Dummy-Target" class="headerlink" title="添加Dummy Target"></a>添加Dummy Target</h1><p>点击顶部菜单 <strong>Editor/Add Target…</strong> 弹出新建 Target 窗口，在 <strong>macOS/Application</strong> 下选择 <strong>Command Line Tool</strong>，点击 <strong>Next</strong>。</p>
+<h2 id="添加Dummy-Target"><a href="#添加Dummy-Target" class="headerlink" title="添加Dummy Target"></a>添加Dummy Target</h2><p>点击顶部菜单 <strong>Editor/Add Target…</strong> 弹出新建 Target 窗口，在 <strong>macOS/Application</strong> 下选择 <strong>Command Line Tool</strong>，点击 <strong>Next</strong>。</p>
 <img src="/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_add_dummy_target.png" alt="添加dummy target" title="添加dummy target">
 <p>接下来 Target 信息 <strong>Product Name</strong> 可以填 <code>dummy</code>，其他选项保持默认，点击 <strong>Finish</strong>。</p>
 <p>Dummy Target 添加完毕默认选中了工程的配置文件，按照图中的顺序依次点击 <strong>xcode_redis 工程文件/TARGETS/dummy/Build Phases/Compile Sources/+</strong></p>
@@ -523,7 +523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Xcode阅读Makefile管理的C-C-项目源码（支持调试，符号跳转，自动补全）"><span class="nav-number">1.</span> <span class="nav-text">使用Xcode阅读Makefile管理的C/C++项目源码（支持调试，符号跳转，自动补全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clone-Redis到本地"><span class="nav-number">1.1.</span> <span class="nav-text">Clone Redis到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode创建External-Build-System项目"><span class="nav-number">1.2.</span> <span class="nav-text">Xcode创建External Build System项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置External-Build-System"><span class="nav-number">1.3.</span> <span class="nav-text">配置External Build System</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加Dummy-Target"><span class="nav-number">2.</span> <span class="nav-text">添加Dummy Target</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Xcode阅读Makefile管理的C-C-项目源码（支持调试，符号跳转，自动补全）"><span class="nav-number">1.</span> <span class="nav-text">使用Xcode阅读Makefile管理的C/C++项目源码（支持调试，符号跳转，自动补全）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clone-Redis到本地"><span class="nav-number">1.1.</span> <span class="nav-text">Clone Redis到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode创建External-Build-System项目"><span class="nav-number">1.2.</span> <span class="nav-text">Xcode创建External Build System项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置External-Build-System"><span class="nav-number">1.3.</span> <span class="nav-text">配置External Build System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Dummy-Target"><span class="nav-number">1.4.</span> <span class="nav-text">添加Dummy Target</span></a></li></ol></li></ol></div>
             
 
           </div>

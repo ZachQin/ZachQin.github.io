@@ -349,7 +349,7 @@
 <p>现在我们已经可以直接使用 Xcode 给代码添加断点了。下图我们在 <code>server.c</code> 文件的 main 函数中点击代码左侧来添加断点，按下 <code>⌘ + R</code> 程序自动停在断点处。</p>
 <img src="/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_redis_debug.png" alt="断点调试" title="断点调试">
 <p>此时虽然代码已经可以高亮关键字，但我们仍然无法使用代码跳转和自动补全功能。这些功能就需要下一步的 Dummy Target 辅助完成。</p>
-<h1 id="添加Dummy-Target"><a href="#添加Dummy-Target" class="headerlink" title="添加Dummy Target"></a>添加Dummy Target</h1><p>点击顶部菜单 <strong>Editor/Add Target…</strong> 弹出新建 Target 窗口，在 <strong>macOS/Application</strong> 下选择 <strong>Command Line Tool</strong>，点击 <strong>Next</strong>。</p>
+<h2 id="添加Dummy-Target"><a href="#添加Dummy-Target" class="headerlink" title="添加Dummy Target"></a>添加Dummy Target</h2><p>点击顶部菜单 <strong>Editor/Add Target…</strong> 弹出新建 Target 窗口，在 <strong>macOS/Application</strong> 下选择 <strong>Command Line Tool</strong>，点击 <strong>Next</strong>。</p>
 <img src="/2017/06/10/使用Xcode阅读Makefile管理的C:C++项目源码（支持调试，符号跳转）/xcode_add_dummy_target.png" alt="添加dummy target" title="添加dummy target">
 <p>接下来 Target 信息 <strong>Product Name</strong> 可以填 <code>dummy</code>，其他选项保持默认，点击 <strong>Finish</strong>。</p>
 <p>Dummy Target 添加完毕默认选中了工程的配置文件，按照图中的顺序依次点击 <strong>xcode_redis 工程文件/TARGETS/dummy/Build Phases/Compile Sources/+</strong></p>
