@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://zachqin.github.io/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_dummy_configuration.png">
 <meta property="og:image" content="http://zachqin.github.io/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_dummy_add_compile_sources.png">
 <meta property="og:image" content="http://zachqin.github.io/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_autocomplete.png">
-<meta property="og:updated_time" content="2017-06-10T10:24:50.000Z">
+<meta property="og:updated_time" content="2017-06-10T10:27:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Xcode阅读Makefile管理的C&#x2F;C++项目源码（支持调试，符号跳转）">
 <meta name="twitter:description" content="使用Xcode阅读Makefile管理的C/C++项目源码（支持调试，符号跳转，自动补全）最近打算阅读一些C/C++的开源项目源码来提升自己，不过开源项目大多使用Makefile构建和管理。关于阅读代码，我之前在Windows下用过 Source Insight ，它的符号调转、查找、导航非常强大，体验很好，但Mac平台一直没找到那么好用的代码浏览工具，Sublime Text + CTags 勉">
@@ -360,27 +360,27 @@
 <h2 id="Clone-Redis到本地"><a href="#Clone-Redis到本地" class="headerlink" title="Clone Redis到本地"></a>Clone Redis到本地</h2><p>假设我存储 Redis 仓库的本地路径是 <code>~/Developer/Read/</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Developer/Read</div><div class="line">git <span class="built_in">clone</span> https://github.com/antirez/redis.git</div></pre></td></tr></table></figure>
 <h2 id="Xcode创建External-Build-System项目"><a href="#Xcode创建External-Build-System项目" class="headerlink" title="Xcode创建External Build System项目"></a>Xcode创建External Build System项目</h2><p>我当前的Xcode版本是8.3.3，在创建项目窗口的 <strong>Cross-platform/Other</strong> 下选择 <strong>External Build System</strong>。</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_new_project.png" alt="Xcode新建项目" title="Xcode新建项目">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_new_project.png" alt="Xcode 新建项目" title="Xcode 新建项目">
 <p>点击 <strong>Next</strong>，接下来项目信息 <strong>Product Name</strong> 可以填 <code>xcode_redis</code>，其他选项保持默认。</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_project_info.png" alt="Xcode项目信息" title="Xcode项目信息">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_project_info.png" alt="Xcode 项目信息" title="Xcode 项目信息">
 <p>点击<strong>Next</strong>，然后选择项目存放的位置，建议选择 redis 本地仓库的<strong>上一级</strong>（即本文中的 <code>~/Developer/Read/</code>），最后点击 <strong>Create</strong> 完成项目的创建。</p>
 <h2 id="配置External-Build-System"><a href="#配置External-Build-System" class="headerlink" title="配置External Build System"></a>配置External Build System</h2><p>项目创建完毕默认选中了工程的配置文件，按照图中的顺序依次点击 <strong>xcode_redis 工程文件/TARGETS/xcode_redis/info</strong> ，在 Directory 中填入 <code>../redis</code>。</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_configuration.png" alt="配置xcode_redis" title="配置xcode_redis">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_configuration.png" alt="配置 xcode_redis" title="配置 xcode_redis">
 <p>使用 <code>⌘ + B</code> 构建工程，如果构建失败，可以尝试在终端使用以下命令来安装命令行工具，再重新构建。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
 <p>如果构建成功，我们需要设置可执行文件的路径。点击顶部菜单 <strong>Product/Scheme/Edit Scheme…</strong> 在弹出的Scheme窗口中选择 <strong>Run/Info</strong>，将 <strong>Executable</strong> 从 None 改为 <strong>Other…</strong></p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_scheme.png" alt="修改scheme" title="修改scheme">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_scheme.png" alt="修改 scheme" title="修改 scheme">
 <p>在弹出的文件选择对话框中选择刚刚构建出来的服务器端可执行文件，路径为 <code>~/Developer/Read/redis/src/redis-server</code>。</p>
 <img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_scheme_executable.png" alt="添加可执行文件" title="添加可执行文件">
 <p>现在工程已经可以运行了，按下 <code>⌘ + R</code> 可以看到控制台的输出。</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_output.png" alt="redis运行成功输出" title="redis运行成功输出">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_output.png" alt="Redis 运行成功输出" title="Redis 运行成功输出">
 <p>为了可以断点调试以及阅读，接下来我们需要给这个工程添加文件，在左侧导航栏右键选择 <strong>Add Files to “xcode_redis”…</strong>，弹出文件选择对话框，点击 <strong>options</strong> 按钮，然后按照下图取消 <strong>Destination: Copy items if needed</strong> 的勾选，并确保 <strong>Added folders: Create groups</strong> 和 <strong>Add to targets: xcode_redis</strong> 是选中状态，然后选中 Redis 仓库的根目录 <code>~/Developer/Read/</code> 点击 <strong>Add</strong>。</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_add_files.png" alt="向xcode_redis添加文件" title="向xcode_redis添加文件">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_add_files.png" alt="向 xcode_redis 添加文件" title="向 xcode_redis 添加文件">
 <p>现在我们已经可以直接使用 Xcode 给代码添加断点了。下图我们在 <code>server.c</code> 文件的 main 函数中点击代码左侧来添加断点，按下 <code>⌘ + R</code> 程序自动停在断点处。</p>
 <img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_debug.png" alt="断点调试" title="断点调试">
 <p>此时虽然代码已经可以高亮关键字，但我们仍然无法使用代码跳转和自动补全功能。这些功能就需要下一步的 Dummy Target 辅助完成。</p>
 <h2 id="添加Dummy-Target"><a href="#添加Dummy-Target" class="headerlink" title="添加Dummy Target"></a>添加Dummy Target</h2><p>点击顶部菜单 <strong>Editor/Add Target…</strong> 弹出新建 Target 窗口，在 <strong>macOS/Application</strong> 下选择 <strong>Command Line Tool</strong>，点击 <strong>Next</strong>。</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_add_dummy_target.png" alt="添加dummy target" title="添加dummy target">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_add_dummy_target.png" alt="添加 dummy target" title="添加 dummy target">
 <p>接下来 Target 信息 <strong>Product Name</strong> 可以填 <code>dummy</code>，其他选项保持默认，点击 <strong>Finish</strong>。</p>
 <p>Dummy Target 添加完毕默认选中了工程的配置文件，按照图中的顺序依次点击 <strong>xcode_redis 工程文件/TARGETS/dummy/Build Phases/Compile Sources/+</strong></p>
 <img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_dummy_configuration.png" alt="设置dummy target的编译源" title="设置dummy target的编译源">
@@ -388,7 +388,7 @@
 <img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_dummy_add_compile_sources.png" alt="批量添加编译源文件" title="批量添加编译源文件">
 <p>Redis 是 C 项目，如果项目是 C++， 这一步的过滤器输入应该输入 <code>*.cpp</code> 或者 <code>*.cc</code>。</p>
 <p>完成了编译源的添加，现在 Xcode 已经可以进行符号跳转和自动补全了，可以欢快地阅读了~</p>
-<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_autocomplete.png" alt="xcode自动补全" title="xcode自动补全">
+<img src="/2017/06/10/makefile-project-managed-by-xcode/xcode_redis_autocomplete.png" alt="Xcode 自动补全" title="Xcode 自动补全">
 <p>注：如果到了这一步，符号跳转和自动补全仍然不起作用，可以将当前 Target 切换为 dummy，按下 <code>⌘ + B</code> 进行一次构建，强制 Xcode 建立符号索引。在 dummy 中进行构建可能会报错，不过我们只是为了使用 dummy 下的索引，并不需要真正构建，所以错误直接无视即可，构建完毕再将当前 Target 切换回 xcode_redis。</p>
 
       
