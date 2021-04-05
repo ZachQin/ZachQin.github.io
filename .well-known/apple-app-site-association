@@ -1,0 +1,19 @@
+{
+    "applinks": {
+        "details": [
+            {
+                "appIDs": [
+                    "9MLY55Y69S.zktsin.BaseDemo"
+                ],
+                "paths": [
+                    "*"
+                ]
+            }
+        ]
+    },
+    "webcredentials": {
+        "apps": [
+            "9MLY55Y69S.zktsin.BaseDemo"
+        ]
+    }
+}
