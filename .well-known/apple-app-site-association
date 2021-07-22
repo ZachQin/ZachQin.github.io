@@ -8,12 +8,20 @@
                 "paths": [
                     "*"
                 ]
+            }, {
+                "appIDs": [
+                    "9MLY55Y69S.com.zktsin.zkapp"
+                ],
+                "paths": [
+                    "*"
+                ]
             }
         ]
     },
     "webcredentials": {
         "apps": [
-            "9MLY55Y69S.zktsin.BaseDemo"
+            "9MLY55Y69S.zktsin.BaseDemo",
+            "9MLY55Y69S.com.zktsin.zkapp"
         ]
     }
 }
