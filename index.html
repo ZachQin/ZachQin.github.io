@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>k</title>
+  <meta name="description" content="kk">
 </head>
+
 <body>
   <div>
-    <input type="text" id="url-input" autocomplete="off">
+    <input type="text" id="url-input" autocomplete="off" value="https://baidu.com">
   </div>
   <div>
-    <button onclick="location = document.querySelector('#url-input').value">go</button>
+    <button id="go-btn">go</button>
+    <button id="share-btn">share</button>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('#go-btn').onclick = function () {
+        location = document.querySelector('#url-input').value;
+      };
+      document.querySelector('#share-btn').onclick = function () {
+        if (navigator.share) {
+          navigator.share({
+            title: document.title,
+            url: document.querySelector('#url-input').value,
+            text: document.querySelector('meta[name="description"]').content,
+          });
+        } else {
+          alert('not supported!');
+        }
+      };
+    });
+  </script>
 </body>
+
 </html>
