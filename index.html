@@ -10,29 +10,34 @@
 
 <body>
   <div>
-    <input type="text" id="url-input" autocomplete="off" value="https://baidu.com">
+    <input type="text" id="url-input" autocomplete="off">
   </div>
   <div>
     <button id="go-btn">go</button>
     <button id="share-btn">share</button>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('#go-btn').onclick = function () {
-        location = document.querySelector('#url-input').value;
-      };
-      document.querySelector('#share-btn').onclick = function () {
-        if (navigator.share) {
-          navigator.share({
-            title: document.title,
-            url: document.querySelector('#url-input').value,
-            text: document.querySelector('meta[name="description"]').content,
-          });
-        } else {
-          alert('not supported!');
-        }
-      };
-    });
+    const searchParams = new URLSearchParams(location.search);
+
+    const urlInput = document.querySelector('#url-input');
+    const goButton = document.querySelector('#go-btn');
+    const shareButton = document.querySelector('#share-btn');
+
+    urlInput.value = searchParams.get('target') ?? 'https://baidu.com';
+    goButton.onclick = function () {
+      location = urlInput.value;
+    };
+    shareButton.onclick = function () {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          url: urlInput.value,
+          text: document.querySelector('meta[name="description"]').content,
+        });
+      } else {
+        alert('not supported!');
+      }
+    };
   </script>
 </body>
 
